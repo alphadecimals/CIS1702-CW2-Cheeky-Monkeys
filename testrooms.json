@@ -1,0 +1,10 @@
+"Objects"[
+{"ID":"key1", "name":"Red Key", "desc":"A metal key with prominent teeth, the head painted crimson.", "container":"room1", "cancontain":False, "contains":"None", "transparent":False, "verb":"unlock", "openedby":"None"}
+{"ID":"chest", "name":"Strongbox", "desc":"A wooden strongbox with golden accenting.", "container":"room1", "cancontain":True, "contains":"key2", "transparent":False, "verb":"open":, "openedby":"key1"}
+{"ID":"key2", "name":"Blue Key", "desc":"A metal key with prominent teeth, the head painted cerulean.", "container":"chest", "cancontain":False, "contains":"None", "transparent":False, "verb":"unlock", "openedby":"None"}
+{"ID":"key3", "name":"Green Key", "desc":"A metal key with prominent teeth, the head painted olive.", "container":"room1", "cancontain":False, "contains":"None", "transparent":False, "verb":"unlock", "openedby":"None"}
+]
+"Rooms"[
+{"ID":"room0", "name":"Lobby", "gridpos":[0, 0]", "locked":[true, true, true, true] "unlockers":["key2", "", "key3", ""]}
+{"ID":"room1", "name":"Lobby", "gridpos":[1, 0]", "locked":[true, true, false, true] "unlockers":["", "", "", ""]}
+]
