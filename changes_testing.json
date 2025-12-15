@@ -1,0 +1,42 @@
+[
+    {
+        "ID": "room0",
+        "name": "Lobby",
+        "gridpos": [
+            0,
+            0
+        ],
+        "locked": [
+            true,
+            true,
+            true,
+            true
+        ],
+        "unlockers": [
+            "key2",
+            "",
+            "key3",
+            ""
+        ]
+    },
+    {
+        "ID": "room1",
+        "name": "PartyRoom!",
+        "gridpos": [
+            1,
+            0
+        ],
+        "locked": [
+            true,
+            true,
+            false,
+            true
+        ],
+        "unlockers": [
+            "",
+            "",
+            "",
+            ""
+        ]
+    }
+]
