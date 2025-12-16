@@ -1,4 +1,18 @@
 import json 
+from input_system import parse_command
+
+def game_loop():
+    print("Game Started.Type'quit' to exit.")
+    while True:
+        cmd=parse_command(input(">"))
+        if cmd is None:
+            continue
+        if cmd.verb=="quit":
+            print("Bye!")
+            break
+        print(cmd)
+if __name__=="__main__":
+    game_loop()
 
 def main():
     # Testing file management with dummy jsons 
