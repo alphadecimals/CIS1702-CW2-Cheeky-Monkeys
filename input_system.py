@@ -1,23 +1,27 @@
 from dataclasses import dataclass
 from typing import Optional, List
 
-DIRECTION_SYNONYMS = {
-    "n": "north", "north": "north",
-    "e": "east", "east": "east",
-    "s": "south", "south": "south",
-    "w": "west", "west": "west",
-}
+MOVE_VERBS={"go","move","walk"}
+NORTH_WORDS={"n","north","up"}
+EAST_WORDS={"e","east","right"}
+SOUTH_WORDS={"s","south","down"}
+WEST_WORDS={"w","west","left"}
 
-VERB_SYNONYMS = {
-    "go": "go", "move": "go",
-    "look": "look", "inspect": "look",
-    "take": "take", "get": "take",
-    "drop": "drop",
-    "use": "use",
-    "unlock": "unlock",
-    "inventory": "inventory", "inv": "inventory",
-    "quit": "quit", "exit": "quit"
-}
+DIRECTION_WORDS=NORTH_WORDS|EAST_WORDS|SOUTH_WORDS|WEST_WORDS
+
+
+DIR_NORMLIZE={}
+for w in NORTH_WORDS:
+DIR_NORMILIZE[w]="north"
+for w in EAST_WORDS:
+DIR_NORMILIZE[w]="east"
+for w in SOUTH_WORDS:
+DIR_NORMILIZE[w]="south"
+for w in WEST_WORDS:
+DIR_NORMILIZE[w]="west"
+
+DIR_ORDER=["north","east","south","west"]
+DIR_INDEX={d:i for i,d in enumerate(DIR_ORDER)}
 
 @dataclass
 class Command:
