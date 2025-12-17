@@ -1,4 +1,5 @@
 import json 
+
 from input_system import parse_command
 
 def game_loop():
@@ -22,7 +23,7 @@ def main():
     print(f"Items: {items}")
     print(f"Room1 original name: {rooms[1]['name']}")
 
-    rooms[1]['name'] = 'PartyRoom!'
+    rooms[1]['name'] = 'Dungeon'
     save_inventory('changes_testing.json', rooms)
     new_file = load_inventory('changes_testing.json')
 
@@ -35,10 +36,10 @@ def load_inventory(filename):
         with open(filename, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        print("!! File not found !! Returning empty... ", end="")
+        print("!! File not found !! Exiting... ", end="")
     except json.JSONDecodeError:
-        print("!! File corrupted !! Returning empty... ", end="")
-    return []
+        print("!! File corrupted !! Exiting... ", end="")
+    exit()
 
 def save_inventory(filename, data):
     print("Attempting to save data... ")
