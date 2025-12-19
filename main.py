@@ -1,6 +1,22 @@
 import json 
-
 from input_system import parse_command
+
+class Player:
+    def __init__(self, name):
+        self.name = name 
+        self.hp = 100
+        self.score = 0
+    
+    def lose_hp(self, damage):
+        self.hp -= damage 
+        self.score -= 5
+    
+    def gain_hp(self, heal):
+        self.hp += heal 
+    
+    def gain_points(self, points):
+        self.score += points 
+    
 
 def game_loop():
     print("Game Started.Type'quit' to exit.")
@@ -12,25 +28,21 @@ def game_loop():
             print("Bye!")
             break
         print(cmd)
-if __name__=="__main__":
-    game_loop()
+#if __name__=="__main__":
+#    game_loop()
 
 def main():
-    # Testing file management with dummy jsons 
-    items = load_inventory("items_test.json")
-    rooms = load_inventory("rooms_test.json")
-    
-    print(f"Items: {items}")
-    print(f"Room1 original name: {rooms[1]['name']}")
+    items = load_file("items_test.json")
+    rooms = load_file("rooms_test.json")
 
-    rooms[1]['name'] = 'Dungeon'
-    save_inventory('changes_testing.json', rooms)
-    new_file = load_inventory('changes_testing.json')
+    player = Player(input("Username: "))
+    player.lose_hp(20)
+    player.gain_points(200)
+    print(f"{player.name}: {player.score} POINTS")
 
-    print(f"Altered room name: {new_file[1]['name']}")
-    
+    save_file(f'{player.name}_receipt.json', player.__dict__)
 
-def load_inventory(filename):
+def load_file(filename):
     """Safely attempts to open the specified filepath, returning either the JSON file or an empty list. """
     try:
         with open(filename, 'r') as f:
@@ -41,7 +53,7 @@ def load_inventory(filename):
         print("!! File corrupted !! Exiting... ", end="")
     exit()
 
-def save_inventory(filename, data):
+def save_file(filename, data):
     print("Attempting to save data... ")
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
