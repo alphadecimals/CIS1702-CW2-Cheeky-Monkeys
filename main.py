@@ -5,7 +5,15 @@ from input_system import parse_command
 
 """Note: add docstrings"""
 
+'''
+This is the main game file, which initiates the game. It loads an instance of the player class, defines the game loop, and handles saving/loading of player data.
+It also tracks time taken to complete the game, prints it out and the player score once the game is completed.
+
+This file, is essentially the glue that holds all the game files together.
+'''
+
 class Player:
+    # A class to create a player object, tracking stats such as hp, score, time taken etc.
     def __init__(self, name):
         self.name = name 
         self.hp = 100
@@ -24,6 +32,7 @@ class Player:
     
 
 def game_loop():
+    # The game loop function. It exists continuously, until the player types 'quit', which is when the loop is broken and the game ends.
     print("Game Started.Type'quit' to exit.")
     while True:
         cmd=parse_command(input(">"))
