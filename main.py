@@ -3,8 +3,6 @@ import time
 from random import randint
 from input_system import parse_command
 
-"""Note: add docstrings"""
-
 '''
 This is the main game file, which initiates the game. It loads an instance of the player class, defines the game loop, and handles saving/loading of player data.
 It also tracks time taken to complete the game, prints it out and the player score once the game is completed.
@@ -40,10 +38,8 @@ def game_loop():
             continue
         if cmd.verb=="quit":
             print("Bye!")
-            break
+            exit()
         print(cmd)
-#if __name__=="__main__":
-#    game_loop()
 
 def main():
     time_start = time.time()
@@ -53,9 +49,10 @@ def main():
 
     player = Player(input("Username: "))
 
-    # Testing player object and stats logging, points and hp are non-import amounts
-    player.gain_points(200)
-    player.lose_hp(randint(1, 100))
+    # Give player 50 points to start, to allow some room for losing HP before hitting negative
+    player.gain_points(50)
+
+    # game_loop()
 
     if player.hp < 1:
         print("You lost!")
