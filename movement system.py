@@ -3,7 +3,9 @@ coordiantes = [0,0]
 
 def Movementsystem(coords):
     direction= input("you are able to move north, south, east or west. where do you want to move") #ask user where they want to move
-    #  updates the coordianted depending on their answer
+    '''
+    Moves the player in the specified direction by updating their coordinates based on their inputs.
+    Returns the updated coordinates after movement to the main program.'''
     if direction == "north":
         coords[1] = coords[1] + 1
         print("you move north")

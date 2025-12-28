@@ -11,7 +11,7 @@ This file, is essentially the glue that holds all the game files together.
 '''
 
 class Player:
-    # A class to create a player object, tracking stats such as hp, score, time taken etc.
+    '''A class to create a player object, tracking stats such as hp, score, time taken etc.'''
     def __init__(self, name):
         self.name = name 
         self.hp = 100
@@ -30,7 +30,7 @@ class Player:
     
 
 def game_loop():
-    # The game loop function. It exists continuously, until the player types 'quit', which is when the loop is broken and the game ends.
+    '''The game loop function. It exists continuously, until the player types 'quit', which is when the loop is broken and the game ends.'''
     print("Game Started.Type'quit' to exit.")
     while True:
         cmd=parse_command(input(">"))
@@ -42,14 +42,14 @@ def game_loop():
         print(cmd)
 
 def main():
-    time_start = time.time()
+    time_start = time.time() # Start time tracking
 
     items = load_file("items_test.json")
     rooms = load_file("rooms_test.json")
 
     player = Player(input("Username: "))
 
-    # Give player 50 points to start, to allow some room for losing HP before hitting negative
+    '''Give player 50 points to start, to allow some room for losing HP before hitting negative'''
     player.gain_points(50)
 
     # game_loop()
@@ -59,6 +59,9 @@ def main():
     else:
         print("You survived!")
 
+    '''Calculates the time taken to complete the game and creates the timescore.
+       Also makes a note of the player's score and time taken in a JSON file named receipts.'''
+
     time_taken = f"{((time.time()) - time_start):.2f} s"
     player.time_score = time_taken
 
@@ -66,7 +69,11 @@ def main():
     save_file(f'{player.name}_receipt.json', player.__dict__)
 
 def load_file(filename):
-    """Safely attempts to open the specified filepath, returning either the JSON file or an empty list. """
+    '''Safely attempts to open the specified filepath, returning either the JSON file or an empty list.
+    It is in a try except block to prevent the code from crashing if the file is not found or corrupted.
+    
+    Filename: str - The filename of the file to open, which is the JSON file.
+    Returns: dict - The JSON file loaded as a dictionary.'''
     try:
         with open(filename, 'r') as f:
             return json.load(f)
@@ -77,6 +84,10 @@ def load_file(filename):
     exit()
 
 def save_file(filename, data):
+    '''Attempts to save the specified data to the specified filepath.
+    
+    Filename: str - The filename of the file to save to.
+    Data: dict - The data to save to the file.'''
     print("Attempting to save data... ")
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)

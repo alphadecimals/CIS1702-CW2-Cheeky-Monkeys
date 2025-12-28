@@ -12,13 +12,13 @@ DIRECTION_WORDS=NORTH_WORDS|EAST_WORDS|SOUTH_WORDS|WEST_WORDS
 
 DIR_NORMLIZE={}
 for w in NORTH_WORDS:
-DIR_NORMILIZE[w]="north"
+    DIR_NORMLIZE[w]="north"
 for w in EAST_WORDS:
-DIR_NORMILIZE[w]="east"
+    DIR_NORMLIZE[w]="east"
 for w in SOUTH_WORDS:
-DIR_NORMILIZE[w]="south"
+    DIR_NORMLIZE[w]="south"
 for w in WEST_WORDS:
-DIR_NORMILIZE[w]="west"
+    DIR_NORMLIZE[w]="west"
 
 DIR_ORDER=["north","east","south","west"]
 DIR_INDEX={d:i for i,d in enumerate(DIR_ORDER)}
