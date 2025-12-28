@@ -1,3 +1,6 @@
+'''This is a potential outline for the main game file, showing the structure and functions needed.
+Just a skeleton, no actual code implementation. Helps us plan the overall flow of the game and figure out the logic and to prevent mental breakdowns in the future.''' 
+
 class Player:
     pass 
 
