@@ -1,6 +1,9 @@
 from inputSystem import parseCommand
 from fileManagement import saveFile
 
+cmd = input("what will you do?  ")
+keywords = parseCommand(cmd)
+
 def startGame(player):
     if isInvalidState(player):
         showWinScreen(player)
@@ -32,5 +35,6 @@ def interactionSystem(keywords, player):
 
 player = Player()
 start_game(player)
+
 
 
