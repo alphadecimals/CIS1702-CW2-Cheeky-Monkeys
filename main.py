@@ -1,14 +1,17 @@
 import time
 from input_system import parse_command
-from main import save_file
-from main import load_file
+from file_management import save_file
+from file_management import load_file
 
 cmd = input("what will you do?  ")
 keywords = parse_command(cmd)
 
 def startGame(player):
-    time_start = time.time() # Start time tracking
-
+    time_start = time.time() 
+    
+    file = load_file('testrooms.json')
+    items, rooms = file['Objects'], file['Rooms']
+    
     if isInvalidState(player):
         showWinScreen(player)
         saveStats(player, time_start)
@@ -62,6 +65,7 @@ class Player:
 
 player = Player()
 startGame(player)
+
 
 
 
