@@ -1,7 +1,7 @@
 import json 
-import time
-from random import randint
-from input_system import parse_command
+# import time
+# from random import randint
+# from input_system import parse_command
 
 '''
 This is the main game file, which initiates the game. It loads an instance of the player class, defines the game loop, and handles saving/loading of player data.
