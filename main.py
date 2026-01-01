@@ -3,14 +3,18 @@ from input_system import parse_command
 from file_management import save_file
 from file_management import load_file
 
-cmd = input("what will you do?  ")
-keywords = parse_command(cmd)
-
-def startGame(player):
-    time_start = time.time() 
-    
+def startGame():
+    # Load files before starting the timer, so it doesn't affect the player's score
     file = load_file('testrooms.json')
     items, rooms = file['Objects'], file['Rooms']
+
+    time_start = time.time() 
+
+    username = input("Username: ")
+    player = Player(name = username)
+
+    cmd = input("what will you do?  ")
+    keywords = parse_command(cmd)
     
     if isInvalidState(player):
         showWinScreen(player)
@@ -20,12 +24,12 @@ def startGame(player):
         action = getPlayerAction()
         parse_command(action)
 
-def isInvalidState(player):
+def isInvalidState(player): 
     return player.health <= 0 or not validCoordinates(player.coords)
 
 def showWinScreen(player):
     print("Player Wins!")
-    print(f"Time: {player.time}, Score: {player.score}, Stats: {player.stats}")
+    print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.hp}")
 
 def saveStats(player, time_start):
     '''Calculates the time taken to complete the game and creates the timescore.
@@ -63,9 +67,7 @@ class Player:
     def gain_points(self, points):
         self.score += points 
 
-player = Player()
-startGame(player)
-
+startGame()
 
 
 
