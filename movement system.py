@@ -1,4 +1,4 @@
-coordiantes = [0,0] 
+coordiantes = [0,0]  #just for testing remove when using in final program
 
 
 def Movementsystem(coords):
@@ -23,6 +23,7 @@ def Movementsystem(coords):
     return (coords)
 
 
-
+#just for testing remove when using in final program
 coordiantes = Movementsystem(coordiantes)
 print(coordiantes)
+
