@@ -1,5 +1,7 @@
+# Dummy inventory for testing
+inventory = []
 
-def Locked_system(room_index, direction_index):
+def Locked_system(room_index, direction_index, data):
     # gathers the room info
     sucess= False
     status=  data["Rooms"][room_index]["locked"][direction_index]
@@ -22,16 +24,12 @@ def Locked_system(room_index, direction_index):
         sucess = True
         data["Rooms"][room_index]["locked"][direction_index] = False 
     return(sucess) 
-
-        
-
         
 # Example test
-room = 0        # room0
-direction = 0   # first direction
+def test(data):
+    room = 0        # room0
+    direction = 0   # first direction
 
-test = Locked_system(room, direction)
-print("moved=", test)
-
-
+    test = Locked_system(room, direction, data)
+    print("moved=", test)
 
