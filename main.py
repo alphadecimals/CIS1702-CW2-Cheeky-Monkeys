@@ -2,44 +2,57 @@ import time
 from input_system import parse_command
 from file_management import save_file
 from file_management import load_file
+import movement_system
 
 def startGame():
+    try:
     # Load files before starting the timer, so it doesn't affect the player's score
-    file = load_file('testrooms.json')
-    items, rooms = file['Objects'], file['Rooms']
+        file = load_file('testrooms.json')
+        items, rooms = file['Objects'], file['Rooms']
 
-    time_start = time.time() 
+        time_start = time.time() 
+        username = input("Username: ")
+        player = Player(name = username)
 
-    username = input("Username: ")
-    player = Player(name = username)
-
-    cmd = input("what will you do?  ")
-    keywords = parse_command(cmd)
+        cmd = input("what will you do?  ")
+        keywords = parse_command(cmd)
     
-    if isInvalidState(player):
-        showWinScreen(player)
-        saveStats(player, time_start)
-        return "Game Over"
-    else:
-        action = getPlayerAction()
-        parse_command(action)
+        if isInvalidState(player):
+            showWinScreen(player)
+            saveStats(player, time_start)
+            return "Game Over"
+        else:
+            action = getPlayerAction()
+            parse_command(action)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def isInvalidState(player): 
     return player.health <= 0 or not validCoordinates(player.coords)
 
+def validCoordinates(player):
+    if player.coords == movement_system.coordiantes:
+        return True
+    else:
+        return False
+
 def showWinScreen(player):
     print("Player Wins!")
     print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.hp}")
+    saveStats(player, time.time())
 
 def saveStats(player, time_start):
     '''Calculates the time taken to complete the game and creates the timescore.
     Also makes a note of the player's score and time taken in a JSON file named receipts.'''
 
-    time_taken = f"{((time.time()) - time_start):.2f} s"
-    player.time_score = time_taken
+    try:
+        time_taken = f"{((time.time()) - time_start):.2f} s"
+        player.time_score = time_taken
 
-    print(f"{player.name}: {player.score} POINTS\nTime taken: {time_taken}")
-    save_file(f'{player.name}_receipt.json', player.__dict__)
+        print(f"{player.name}: {player.score} POINTS\nTime taken: {time_taken}")
+        save_file(f'{player.name}_receipt.json', player.__dict__)
+    except Exception as e:
+        print(f"An error occurred while saving stats: {e}")
 
 def getPlayerAction():
     return input("Enter your action: ").strip().lower()
@@ -48,7 +61,7 @@ def interactionSystem(keywords, player):
     print(f"Interacting with {keywords['type']}")
     saveStats(player)
 
-#import will's movement system
+
 class Player:
     '''A class to create a player object, tracking stats such as hp, score, time taken etc.'''
     def __init__(self, name):
@@ -56,6 +69,9 @@ class Player:
         self.hp = 100
         self.score = 0
         self.time_score = 0 
+    
+    def move(self, direction):
+        self.coords = movement_system.Movementsystem(self.coords, direction)
     
     def lose_hp(self, damage):
         self.hp -= damage 
@@ -67,7 +83,8 @@ class Player:
     def gain_points(self, points):
         self.score += points 
 
-startGame()
+if __name__ == "__main__":
+    startGame()
 
 
 
