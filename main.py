@@ -1,5 +1,6 @@
 import time
 from input_system import parse_command
+import Inventory_System
 from file_management import save_file
 from file_management import load_file
 import movement_system
@@ -61,6 +62,18 @@ def interactionSystem(keywords, player):
     print(f"Interacting with {keywords['type']}")
     saveStats(player)
 
+def getInventory(player, item):
+    try:
+        inventory = Inventory_System.InventorySystem()
+        if item == player.input("Enter the item to take: "):
+            if inventory.Used_Up(item):
+                print("Item has already been used up.")
+            else:
+                inventory.Take_From(item)
+        else:
+            print("Item not found in the current room.")
+    except Exception as e:
+        print(f"An error occurred while getting inventory: {e}")
 
 class Player:
     '''A class to create a player object, tracking stats such as hp, score, time taken etc.'''
