@@ -16,8 +16,13 @@ It runs of Python Classes, JSON files and integrating other Python files into th
 
 ## The Group Members
 **Team Leader/1**: Dominik Keijzer
+
 **Repository Manager/2**: Me (Juana Wesley)
+
 **Documenter/3**: Rosie Freeman
+
 **Coder/4**: Javeria Ali
+
 **Coder/5**: Will Evans
+
 **Coder/6** Kateryna Pakhnyts
