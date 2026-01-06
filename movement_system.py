@@ -6,7 +6,7 @@ coordiantes = [0,0]  #just for testing remove when using in final program
 index = 0 
 
 # gets the index of the room
-data = load_file('testrooms.json')
+data = load_file('rooms_items.json')
 while data["Rooms"][index]["gridpos"] != coordiantes:
     index = index + 1
 
