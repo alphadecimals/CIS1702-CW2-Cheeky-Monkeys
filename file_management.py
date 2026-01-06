@@ -80,7 +80,7 @@ def load_file(filename):
     except FileNotFoundError:
         print(f"!! File of name '{filename}' not found !! Exiting... ", end="")
     except json.JSONDecodeError:
-        print("!! File of name '{filename}' corrupted !! Exiting... ", end="")
+        print("!! File corrupted !! Exiting... ", end="")
     exit()
 
 def save_file(filename, data):
