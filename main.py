@@ -15,16 +15,20 @@ def startGame():
         username = input("Username: ")
         player = Player(name = username)
 
+        """IN CASE OF EMERGENCY, REMOVE HASH (If we don't fix the interaction bug, consider returning early with the part that works)
+        If do, include a comment before, explaining the WHY.)"""
+        # return showWinScreen(player, time_start)
+
         cmd = input("what will you do?  ")
         keywords = parse_command(cmd)
-    
+
         if isInvalidState(player):
-            showWinScreen(player)
-            saveStats(player, time_start)
+            showWinScreen(player, time_start)
             return "Game Over"
         else:
             action = getPlayerAction()
             parse_command(action)
+            pass
     except Exception as e:
         print(f"An error occurred: {e}")
         exit()
@@ -38,10 +42,10 @@ def validCoordinates(player):
     else:
         return False 
 
-def showWinScreen(player):
+def showWinScreen(player, time_start):
     print("Player Wins!")
     print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
-    saveStats(player, time.time())
+    saveStats(player,time_start)
 
 def saveStats(player, time_start):
     '''Calculates the time taken to complete the game and creates the timescore.
