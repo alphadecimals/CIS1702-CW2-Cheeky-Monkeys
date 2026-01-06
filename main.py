@@ -1,36 +1,110 @@
-import json 
+import time
+from input_system import parse_command
+import Inventory_System
+from file_management import save_file
+from file_management import load_file
+import movement_system
 
-def main():
-    # Testing file management with dummy jsons 
-    items = load_inventory("items_test.json")
-    rooms = load_inventory("rooms_test.json")
-    
-    print(f"Items: {items}")
-    print(f"Room1 original name: {rooms[1]['name']}")
-
-    rooms[1]['name'] = 'PartyRoom!'
-    save_inventory('changes_testing.json', rooms)
-    new_file = load_inventory('changes_testing.json')
-
-    print(f"Altered room name: {new_file[1]['name']}")
-    
-
-def load_inventory(filename):
-    """Safely attempts to open the specified filepath, returning either the JSON file or an empty list. """
+def startGame():
     try:
-        with open(filename, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print("!! File not found !! Returning empty... ", end="")
-    except json.JSONDecodeError:
-        print("!! File corrupted !! Returning empty... ", end="")
-    return []
+    # Load files before starting the timer, so it doesn't affect the player's score
+        file = load_file('testrooms.json')
+        items, rooms = file['Objects'], file['Rooms']
 
-def save_inventory(filename, data):
-    print("Attempting to save data... ")
-    with open(filename, 'w') as f:
-        json.dump(data, f, indent=4)
-        print("Data saved!")
+        time_start = time.time() 
+        username = input("Username: ")
+        player = Player(name = username)
+
+        """IN CASE OF EMERGENCY, REMOVE HASH (If we don't fix the interaction bug, consider returning early with the part that works)
+        If do, include a comment before, explaining the WHY.)"""
+        # return showWinScreen(player, time_start)
+
+        cmd = input("what will you do?  ")
+        keywords = parse_command(cmd)
+
+        if isInvalidState(player):
+            showWinScreen(player, time_start)
+            return "Game Over"
+        else:
+            action = getPlayerAction()
+            parse_command(action)
+            pass
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        exit()
+
+def isInvalidState(player): 
+    return player.health <= 0 or not validCoordinates(player)
+
+def validCoordinates(player):
+    if player.coords == movement_system.coordiantes:
+        return True
+    else:
+        return False 
+
+def showWinScreen(player, time_start):
+    print("Player Wins!")
+    print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
+    saveStats(player,time_start)
+
+def saveStats(player, time_start):
+    '''Calculates the time taken to complete the game and creates the timescore.
+    Also makes a note of the player's score and time taken in a JSON file named receipts.'''
+
+    try:
+        time_taken = f"{((time.time()) - time_start):.2f} s"
+        player.time_score = time_taken
+
+        print(f"{player.name}: {player.score} POINTS\nTime taken: {time_taken}")
+        save_file(f'{player.name}_receipt.json', player.__dict__)
+    except Exception as e:
+        print(f"An error occurred while saving stats: {e}")
+
+def getPlayerAction():
+    return input("Enter your action: ").strip().lower()
+
+def interactionSystem(keywords, player):
+    print(f"Interacting with {keywords['type']}")
+    saveStats(player)
+
+def getInventory(player, item):
+    try:
+        inventory = Inventory_System.InventorySystem()
+        if item == player.input("Enter the item to take: "):
+            if inventory.Used_Up(item):
+                print("Item has already been used up.")
+            else:
+                inventory.Take_From(item)
+        else:
+            print("Item not found in the current room.")
+    except Exception as e:
+        print(f"An error occurred while getting inventory: {e}")
+
+class Player:
+    '''A class to create a player object, tracking stats such as hp, score, time taken etc.'''
+    def __init__(self, name):
+        self.name = name 
+        self.health = 100
+        self.score = 0
+        self.time_score = 0 
+        self.coords = movement_system.coordiantes
+    
+    def move(self, direction):
+        self.coords = movement_system.Movementsystem(self.coords, direction)
+    
+    def health(self, damage):
+        self.health -= damage 
+        self.score -= damage
+    
+    def health(self, heal):
+        self.health += heal 
+    
+    def gain_points(self, points):
+        self.score += points 
 
 if __name__ == "__main__":
-    main()
+    print("= GAME START =")
+    startGame()
+
+
+
