@@ -1,3 +1,4 @@
 {
-  "Info":[
-{"Name":"Debug_01", "Description":"A test environment for testing collecting items, unlocking items, unlocking doors, moving through rooms, and escaping.", "EscapeText":"Escape successful."}]
+  "Info":
+  {"Name":"Debug_01", "Description":"A test environment for testing collecting items, unlocking items, unlocking doors, moving through rooms, and escaping.", "EscapeText":"Escape successful."}
+}
