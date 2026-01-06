@@ -46,10 +46,10 @@ def Movementsystem(coords):
         print("not a valid movement option") 
     return (coords)
 
-
+"""
 #just for testing remove when using in final program
 coordiantes = Movementsystem(coordiantes)
 print(coordiantes)
 
-test(data)
+test(data)"""
 
