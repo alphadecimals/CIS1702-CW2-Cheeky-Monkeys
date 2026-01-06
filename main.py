@@ -12,7 +12,7 @@ def startGame():
         items, rooms = file['Objects'], file['Rooms']
         flavourfile = load_file('flavour_text.json')
         info = file['Info']
-        print(f"Scenario: {info["Name"]")
+        print(f"Scenario: {info["Name"]}")
         print(info["Description"])
 
         username = input("Username: ")
