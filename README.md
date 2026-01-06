@@ -7,6 +7,7 @@ The public repository for our group project, by us the Cheeky Monkeys
 Run main.py to start the game.  
 Enter your username and follow along the games story.  
 You are allowed to move north, east, west and south.  
+> When it says the door is locked, it is theroractical, so every time you move in a direction you gain and loose a random amount of points. This would not have been the case if we had more time and the resources to create the actual dungeon itself.
 The game is also run on a timer.  
 The quicker you finish the better your score will be.  
 Any actions that causes your character to be invalid makes the game end instantly and you loose.  
