@@ -10,10 +10,14 @@ def startGame():
         # Loads files before starting the timer, so it doesn't affect the player's score
         file = load_file('testrooms.json')
         items, rooms = file['Objects'], file['Rooms']
+        flavourfile = load_file('flavour_text.json')
+        info = file['Info']
+        print(f"Scenario: {info["Name"]")
+        print(info["Description"])
 
-        time_start = time.time() 
         username = input("Username: ")
         player = Player(name = username)
+        time_start = time.time() 
 
         if isInvalidState(player):
             showWinScreen(player, time_start)
@@ -35,6 +39,7 @@ def validCoordinates(player):
         return False 
 
 def showWinScreen(player, time_start):
+    print(Info["EscapeText"])
     print("Player Wins!")
     print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
     saveStats(player,time_start)
@@ -97,6 +102,7 @@ class Player:
 if __name__ == "__main__":
     print("= GAME START =")
     startGame()
+
 
 
 
