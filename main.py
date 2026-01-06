@@ -7,17 +7,13 @@ import movement_system
 
 def startGame():
     try:
-    # Load files before starting the timer, so it doesn't affect the player's score
+        # Loads files before starting the timer, so it doesn't affect the player's score
         file = load_file('testrooms.json')
         items, rooms = file['Objects'], file['Rooms']
 
         time_start = time.time() 
         username = input("Username: ")
         player = Player(name = username)
-
-        """IN CASE OF EMERGENCY, REMOVE HASH (If we don't fix the interaction bug, consider returning early with the part that works)
-        If do, include a comment before, explaining the WHY.)"""
-        # return showWinScreen(player, time_start)
 
         if isInvalidState(player):
             showWinScreen(player, time_start)
