@@ -8,7 +8,7 @@ from random import randint
 
 def startGame():
     try:
-        # Loads files before starting the timer, so it doesn't affect the player's score
+        # Loads files and gets username before starting the timer, so it doesn't affect the player's score
         file = load_file('rooms_items.json')
         items, rooms = file['Objects'], file['Rooms']
         flavourfile = load_file('flavour_text.json')
@@ -18,6 +18,7 @@ def startGame():
 
         username = input("Username: ")
         player = Player(name = username)
+        
         time_start = time.time() 
 
         moves = 0
