@@ -58,7 +58,7 @@ def saveStats(player, time_start):
         print(f"An error occurred while saving stats: {e}")
 
 def getPlayerAction():
-    return input("Enter your action (Tip: You can use 'go north', 'up', etc.): ").strip().lower()
+    return input("Enter your action (Tip: You can use 'go north', 'go south', etc.): ").strip().lower()
 
 def interactionSystem(keywords, player):
     print(f"Interacting with {keywords['type']}")
