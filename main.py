@@ -19,16 +19,12 @@ def startGame():
         If do, include a comment before, explaining the WHY.)"""
         # return showWinScreen(player, time_start)
 
-        cmd = input("what will you do?  ")
-        keywords = parse_command(cmd)
-
         if isInvalidState(player):
             showWinScreen(player, time_start)
             return "Game Over"
         else:
             action = getPlayerAction()
             parse_command(action)
-            pass
     except Exception as e:
         print(f"An error occurred: {e}")
         exit()
@@ -61,7 +57,7 @@ def saveStats(player, time_start):
         print(f"An error occurred while saving stats: {e}")
 
 def getPlayerAction():
-    return input("Enter your action: ").strip().lower()
+    return input("Enter your action (Tip: You can use 'go north', 'up', etc.): ").strip().lower()
 
 def interactionSystem(keywords, player):
     print(f"Interacting with {keywords['type']}")
