@@ -54,4 +54,4 @@ def parse_command(user_input: str) -> Optional[Command]:
         obj = " ".join(parts[1:]) if len(parts) > 1 else None
         return Command(verb=verb, obj=obj, raw=user_input)
 
-    return Command(verb=verb, raw=user_input)
+    return Command(part[1])
