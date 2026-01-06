@@ -8,7 +8,7 @@ import movement_system
 def startGame():
     try:
         # Loads files before starting the timer, so it doesn't affect the player's score
-        file = load_file('testrooms.json')
+        file = load_file('rooms_items.json')
         items, rooms = file['Objects'], file['Rooms']
         flavourfile = load_file('flavour_text.json')
         info = file['Info']
@@ -20,7 +20,7 @@ def startGame():
         time_start = time.time() 
 
         if isInvalidState(player):
-            showWinScreen(player, time_start)
+            showWinScreen(player, time_start, info)
             return "Game Over"
         else:
             action = getPlayerAction()
@@ -38,7 +38,7 @@ def validCoordinates(player):
     else:
         return False 
 
-def showWinScreen(player, time_start):
+def showWinScreen(player, time_start, Info):
     print(Info["EscapeText"])
     print("Player Wins!")
     print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
