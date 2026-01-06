@@ -8,7 +8,7 @@ from random import randint
 
 def startGame():
     try:
-        # Loads files before starting the timer, so it doesn't affect the player's score
+        # Loads files and gets username before starting the timer, so it doesn't affect the player's score
         file = load_file('rooms_items.json')
         items, rooms = file['Objects'], file['Rooms']
         flavourfile = load_file('flavour_text.json')
@@ -18,6 +18,7 @@ def startGame():
 
         username = input("Username: ")
         player = Player(name = username)
+        
         time_start = time.time() 
 
         moves = 0
@@ -32,10 +33,12 @@ def startGame():
                     player.coords = movement_system.Movementsystem(player.coords,choice)
                     moves += 1 
                     player.gain_points(randint(5, 500))
-                    player.lose_hp(randint(1, 50))
+                    player.lose_hp(randint(1, 35))
 
                 else:
                     print("Please give your direction as 'north', 'east', 'south', 'west'.")
+                    player.health = 0 
+                    showEndScreen(player, time_start, info)
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -51,22 +54,32 @@ def validCoordinates(player):
         return False 
 
 def showEndScreen(player, time_start, Info):
+    time_taken = (time.time() - time_start)
+    player.time_score = round(time_taken)
+
+    if player.time_score < 5:
+        player.gain_points(100)
+        print("\n!! Big time bonus applied !! \n")
+    elif player.time_score < 10:
+        player.gain_points(50)
+        print("\n!! Time bonus applied!! \n")
+    elif player.time_score < 100:
+        player.lose_points(100)
+        print("\n!! Time penalty applied !!\n")
+
     print(Info["EscapeText"])
-    if player.health == 0:
+    if player.health < 1:
         print(f"Player Died!\nHP: {player.health}")
     else:
         print(f"Player Wins!\nHP: {player.health}")
-    saveStats(player,time_start)
+    saveStats(player)
 
-def saveStats(player, time_start):
+def saveStats(player):
     '''Calculates the time taken to complete the game and creates the timescore.
     Also makes a note of the player's score and time taken in a JSON file named receipts.'''
 
     try:
-        time_taken = f"{((time.time()) - time_start):.2f} s"
-        player.time_score = time_taken
-
-        print(f"{player.name}: {player.score} POINTS\nTime taken: {time_taken}")
+        print(f"{player.name}: {player.score} POINTS\nTime taken: {player.time_score}s")
         save_file(f'{player.name}_receipt.json', player.__dict__)
     except Exception as e:
         print(f"An error occurred while saving stats: {e}")
