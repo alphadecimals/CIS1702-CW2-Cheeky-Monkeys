@@ -7,5 +7,8 @@
 
     "Rooms":[
        {"ID":"room0", "name":"Lobby", "gridpos":[0, 0], "locked":[true, true, true, true], "unlockers":["key2", "", "key3", ""]},
-       {"ID":"room1", "name":"Lobby", "gridpos":[1, 0], "locked":[true, true, false, true], "unlockers":["", "", "", ""]}]
+       {"ID":"room1", "name":"Dungeon", "gridpos":[1, 0], "locked":[true, true, false, true], "unlockers":["", "", "", ""]},
+       {"ID":"room1", "name":"Dining Hall", "gridpos":[1, 1], "locked":[true, true, false, true], "unlockers":["", "", "", ""]},
+       {"ID":"room1", "name":"Garden", "gridpos":[0, 1], "locked":[true, true, false, true], "unlockers":["", "", "", ""]}
+    ]
 }
