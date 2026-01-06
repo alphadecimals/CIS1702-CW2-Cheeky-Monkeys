@@ -24,7 +24,12 @@ def startGame():
             return "Game Over"
         else:
             action = getPlayerAction()
-            parse_command(action)
+            choice = parse_command(action)
+            if choice in ["north","east","south","west"]:
+             player.coords = movement_system.Movementsystem(player.coords,choice)
+            else:
+                print("someone needs to do this bit")
+
     except Exception as e:
         print(f"An error occurred: {e}")
         exit()
