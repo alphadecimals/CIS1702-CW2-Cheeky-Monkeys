@@ -4,6 +4,7 @@ import Inventory_System
 from file_management import save_file
 from file_management import load_file
 import movement_system
+from random import randint
 
 def startGame():
     try:
@@ -19,15 +20,20 @@ def startGame():
         player = Player(name = username)
         time_start = time.time() 
 
+        moves = 0
         while True:
-            if isInvalidState(player):
-                showWinScreen(player, time_start, info)
+            if isInvalidState(player) or moves == 4:
+                showEndScreen(player, time_start, info)
                 return "Game Over"
             else:
                 action = getPlayerAction()
                 choice = parse_command(action)
                 if choice in ["north","east","south","west"]:
                     player.coords = movement_system.Movementsystem(player.coords,choice)
+                    moves += 1 
+                    player.gain_points(randint(5, 500))
+                    player.lose_hp(randint(1, 50))
+
                 else:
                     print("Please give your direction as 'north', 'east', 'south', 'west'.")
 
@@ -44,10 +50,12 @@ def validCoordinates(player):
     else:
         return False 
 
-def showWinScreen(player, time_start, Info):
+def showEndScreen(player, time_start, Info):
     print(Info["EscapeText"])
-    print("Player Wins!")
-    print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
+    if player.health == 0:
+        print(f"Player Died!\nHP: {player.health}")
+    else:
+        print(f"Player Wins!\nHP: {player.health}")
     saveStats(player,time_start)
 
 def saveStats(player, time_start):
@@ -95,11 +103,11 @@ class Player:
     def move(self, direction):
         self.coords = movement_system.Movementsystem(self.coords, direction)
     
-    def health(self, damage):
+    def lose_hp(self, damage):
         self.health -= damage 
         self.score -= damage
     
-    def health(self, heal):
+    def gain_hp(self, heal):
         self.health += heal 
     
     def gain_points(self, points):
