@@ -40,7 +40,7 @@ def Movementsystem(coords,direction):
             coords = coords[0] - 1
             print("you move east")
     elif direction == "west":
-        direction = 4
+        direction = 3
         possible = Locked_system(index,direction, data)
         if possible == True: 
             coords = coords[0] + 1
@@ -55,5 +55,6 @@ coordiantes = Movementsystem(coordiantes)
 print(coordiantes)
 
 test(data)"""
+
 
 
