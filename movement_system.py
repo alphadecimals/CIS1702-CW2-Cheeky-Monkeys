@@ -12,8 +12,7 @@ while data["Rooms"][index]["gridpos"] != coordiantes:
     index = index + 1
 
 
-def Movementsystem(coords,action):
-    direction= action.strip() #ask user where they want to move
+def Movementsystem(coords,direction):
     data = load_file('rooms_items.json')
     index = 0
     while data["Rooms"][index]["gridpos"] != coordiantes:
@@ -27,20 +26,20 @@ def Movementsystem(coords,action):
             coords[1] = coords[1] + 1
             print("you move north")
 
-    elif direction[1] == "south":
+    elif direction == "south":
         direction = 2
         possible = Locked_system(index,direction, data)
         if possible == True:
             coords = coords[1] - 1
             print("you move south")
     
-    elif direction[0] == "east":
+    elif direction == "east":
         direction = 1
         possible = Locked_system(index,direction, data)
         if possible == True:
             coords = coords[0] - 1
             print("you move east")
-    elif direction[0] == "west":
+    elif direction == "west":
         direction = 4
         possible = Locked_system(index,direction, data)
         if possible == True: 
