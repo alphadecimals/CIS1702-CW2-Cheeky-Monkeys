@@ -1,7 +1,7 @@
 # CIS1702-CW2-Cheeky-Monkeys
-The public repository for our group project, by us the Cheeky Monkeys\
+The public repository for our group project, by us the Cheeky Monkeys
 
-**WE THE CHEEKY MONKEYS DO NOT TAKE ANY RESPONSIBILITY IF THE CODE CAUSES ANY DAMAGES FOR WHATEVER REASON IT MAY DO SO.**\
+**WE THE CHEEKY MONKEYS DO NOT TAKE ANY RESPONSIBILITY IF THE CODE CAUSES ANY DAMAGES FOR WHATEVER REASON IT MAY DO SO.**
 
 ## Instructions
 Run main.py to start the game.  
@@ -12,8 +12,8 @@ The quicker you finish the better your score will be.
 Any actions that causes your character to be invalid makes the game end instantly and you loose.  
 
 ## The Brief We Chose
-We chose to create a text based adventure game. \
-It runs of Python Classes, JSON files and integrating other Python files into the main file.\
+We chose to create a text based adventure game.  
+It runs of Python Classes, JSON files and integrating other Python files into the main file.
 > This was to follow the Don't Repeat Yourself protocols, to try and keep a Python file to a single purpose.
 
 ## The Group Members
