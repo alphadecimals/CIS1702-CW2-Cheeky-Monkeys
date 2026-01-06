@@ -11,9 +11,11 @@ while data["Rooms"][index]["gridpos"] != coordiantes:
     index = index + 1
 
 
-def Movementsystem(coords):
-    direction= input("you are able to move north, south, east or west. where do you want to move? ").strip() #ask user where they want to move
-    
+def Movementsystem(coords,action):
+    direction= action.strip() #ask user where they want to move
+    data = load_file('rooms_items.json')
+    while data["Rooms"][index]["gridpos"] != coordiantes:
+     index = index + 1
     '''Moves the player in the specified direction by updating their coordinates based on their inputs.
     Returns the updated coordinates after movement to the main program.'''
     if direction == "north":
@@ -52,4 +54,5 @@ coordiantes = Movementsystem(coordiantes)
 print(coordiantes)
 
 test(data)"""
+
 
