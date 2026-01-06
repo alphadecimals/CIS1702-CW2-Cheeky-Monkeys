@@ -19,16 +19,17 @@ def startGame():
         player = Player(name = username)
         time_start = time.time() 
 
-        if isInvalidState(player):
-            showWinScreen(player, time_start, info)
-            return "Game Over"
-        else:
-            action = getPlayerAction()
-            choice = parse_command(action)
-            if choice in ["north","east","south","west"]:
-             player.coords = movement_system.Movementsystem(player.coords,choice)
+        while True:
+            if isInvalidState(player):
+                showWinScreen(player, time_start, info)
+                return "Game Over"
             else:
-                print("Please give your direction as 'north', 'east', 'south', 'west'.")
+                action = getPlayerAction()
+                choice = parse_command(action)
+                if choice in ["north","east","south","west"]:
+                    player.coords = movement_system.Movementsystem(player.coords,choice)
+                else:
+                    print("Please give your direction as 'north', 'east', 'south', 'west'.")
 
     except Exception as e:
         print(f"An error occurred: {e}")
