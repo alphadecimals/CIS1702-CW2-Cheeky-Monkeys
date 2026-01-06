@@ -27,19 +27,20 @@ def startGame():
             parse_command(action)
     except Exception as e:
         print(f"An error occurred: {e}")
+        exit()
 
 def isInvalidState(player): 
-    return player.health <= 0 or not validCoordinates(player.coords)
+    return player.health <= 0 or not validCoordinates(player)
 
 def validCoordinates(player):
     if player.coords == movement_system.coordiantes:
         return True
     else:
-        return False
+        return False 
 
 def showWinScreen(player):
     print("Player Wins!")
-    print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.hp}")
+    print(f"Time: {player.time_score}, Score: {player.score}, HP: {player.health}")
     saveStats(player, time.time())
 
 def saveStats(player, time_start):
@@ -79,24 +80,26 @@ class Player:
     '''A class to create a player object, tracking stats such as hp, score, time taken etc.'''
     def __init__(self, name):
         self.name = name 
-        self.hp = 100
+        self.health = 100
         self.score = 0
         self.time_score = 0 
+        self.coords = movement_system.coordiantes
     
     def move(self, direction):
         self.coords = movement_system.Movementsystem(self.coords, direction)
     
-    def lose_hp(self, damage):
-        self.hp -= damage 
+    def health(self, damage):
+        self.health -= damage 
         self.score -= damage
     
-    def gain_hp(self, heal):
-        self.hp += heal 
+    def health(self, heal):
+        self.health += heal 
     
     def gain_points(self, points):
         self.score += points 
 
 if __name__ == "__main__":
+    print("= GAME START =")
     startGame()
 
 
