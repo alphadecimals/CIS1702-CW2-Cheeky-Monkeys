@@ -1,3 +1,4 @@
+
 from locked_system import Locked_system
 from locked_system import test
 from file_management import load_file
@@ -14,8 +15,9 @@ while data["Rooms"][index]["gridpos"] != coordiantes:
 def Movementsystem(coords,action):
     direction= action.strip() #ask user where they want to move
     data = load_file('rooms_items.json')
+    index = 0
     while data["Rooms"][index]["gridpos"] != coordiantes:
-     index = index + 1
+        index = index + 1
     '''Moves the player in the specified direction by updating their coordinates based on their inputs.
     Returns the updated coordinates after movement to the main program.'''
     if direction == "north":
